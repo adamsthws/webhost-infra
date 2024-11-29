@@ -5,8 +5,8 @@ networks:
     external: true
  
 volumes:
-  mariadb-data:
-  wordpress-data:
+  mariadb-data-wonkatron:
+  wordpress-data-wonkatron:
   traefik-certificates:
  
 services:
