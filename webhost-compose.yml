@@ -34,7 +34,7 @@ services:
     volumes:
       - wordpress-data-wonkatron:/bitnami/wordpress
     environment:
-      WORDPRESS_DATABASE_HOST: mariadb
+      WORDPRESS_DATABASE_HOST: mariadb-wonkatron
       WORDPRESS_DATABASE_PORT_NUMBER: 3306
       WORDPRESS_DATABASE_NAME: ${WORDPRESS_WONKATRON_DB_NAME}
       WORDPRESS_DATABASE_USER: ${WORDPRESS_WONKATRON_DB_USER}
