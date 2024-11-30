@@ -85,7 +85,7 @@ services:
       - "--log.level=${TRAEFIK_LOG_LEVEL}"
       - "--accesslog=true"
       - "--api.dashboard=true"
-      - "--api.insecure=false"
+      - "--api.insecure=true"  # Enable api auth
       - "--ping=true"
       - "--ping.entrypoint=ping"
       - "--entryPoints.ping.address=:8082"
