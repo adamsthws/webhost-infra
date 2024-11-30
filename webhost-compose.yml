@@ -1,4 +1,4 @@
-api.insecure=networks:
+networks:
   wordpress-network-wonkatron:
     external: true
   traefik-network:
@@ -67,7 +67,6 @@ services:
       - "traefik.http.services.wordpress.loadbalancer.server.port=8080"
       - "traefik.http.routers.wordpress.tls=true"
       - "traefik.http.routers.wordpress.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.dashboard.middlewares=authtraefik"
       - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
       - "traefik.http.routers.wordpress.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
@@ -85,7 +84,7 @@ services:
       - "--log.level=${TRAEFIK_LOG_LEVEL}"
       - "--accesslog=true"
       - "--api.dashboard=true"
-      - "--api.insecure=false"
+      - "--api.insecure=true"
       - "--ping=true"
       - "--ping.entrypoint=ping"
       - "--entryPoints.ping.address=:8082"
