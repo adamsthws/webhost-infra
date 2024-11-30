@@ -24,9 +24,9 @@ services:
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 120s
     restart: unless-stopped
  
   wordpress-wonkatron:
@@ -54,11 +54,11 @@ services:
       - wordpress-network-wonkatron
       - traefik-network
     healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      test: timeout 20s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 3
-      start_period: 90s
+      start_period: 180s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wordpress.rule=Host(`${WORDPRESS_WONKATRON_HOSTNAME}`)"
@@ -112,9 +112,9 @@ services:
     healthcheck:
       test: ["CMD", "wget", "http://localhost:8082/ping","--spider"]
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 3
-      start_period: 5s
+      start_period: 20s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_HOSTNAME}`)"
