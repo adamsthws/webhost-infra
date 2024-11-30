@@ -61,14 +61,14 @@ services:
       start_period: 180s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wordpress.rule=Host(`${WORDPRESS_WONKATRON_HOSTNAME}`)"
-      - "traefik.http.routers.wordpress.service=wordpress"
-      - "traefik.http.routers.wordpress.entrypoints=websecure"
-      - "traefik.http.services.wordpress.loadbalancer.server.port=8080"
-      - "traefik.http.routers.wordpress.tls=true"
-      - "traefik.http.routers.wordpress.tls.certresolver=letsencrypt"
-      - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
-      - "traefik.http.routers.wordpress.middlewares=compresstraefik"
+      - "traefik.http.routers.wordpress-wonkatron.rule=Host(`${WORDPRESS_WONKATRON_HOSTNAME}`)"
+      - "traefik.http.routers.wordpress-wonkatron.service=wordpress"
+      - "traefik.http.routers.wordpress-wonkatron.entrypoints=websecure"
+      - "traefik.http.services.wordpress-wonkatron.loadbalancer.server.port=8080"
+      - "traefik.http.routers.wordpress-wonkatron.tls=true"
+      - "traefik.http.routers.wordpress-wonkatron.tls.certresolver=letsencrypt"
+      - "traefik.http.services.wordpress-wonkatron.loadbalancer.passhostheader=true"
+      - "traefik.http.routers.wordpress-wonkatron.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
       - "traefik.docker.network=traefik-network"
     restart: unless-stopped
