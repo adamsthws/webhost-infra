@@ -1,4 +1,4 @@
-api.insecure=networks:
+networks:
   wordpress-network-wonkatron:
     external: true
   traefik-network:
