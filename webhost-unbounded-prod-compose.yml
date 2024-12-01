@@ -56,14 +56,14 @@ services:
       start_period: 90s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wordpress.rule=Host(`${WORDPRESS_HOSTNAME}`)"
-      - "traefik.http.routers.wordpress.service=wordpress"
-      - "traefik.http.routers.wordpress.entrypoints=websecure"
-      - "traefik.http.services.wordpress.loadbalancer.server.port=8080"
-      - "traefik.http.routers.wordpress.tls=true"
-      - "traefik.http.routers.wordpress.tls.certresolver=letsencrypt"
-      - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
-      - "traefik.http.routers.wordpress.middlewares=compresstraefik"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.rule=Host(`${WORDPRESS_HOSTNAME}`)"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.service=wordpress"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.entrypoints=websecure"
+      - "traefik.http.services.${TRAEFIK_LABEL_NAME}.loadbalancer.server.port=8080"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.tls=true"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.tls.certresolver=letsencrypt"
+      - "traefik.http.services.${TRAEFIK_LABEL_NAME}.loadbalancer.passhostheader=true"
+      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
       - "traefik.docker.network=traefik-network"
     restart: unless-stopped
