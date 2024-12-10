@@ -1,13 +1,11 @@
 networks:
   wordpress-network:
     driver: bridge
-  traefik-network:
-    external: true
- 
+
 volumes:
   mariadb-data:
   wordpress-data:
- 
+
 services:
   mariadb:
     image: ${WORDPRESS_MARIADB_IMAGE_TAG}
@@ -25,9 +23,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_period: 60s
+      start_period: 30s
     restart: unless-stopped
- 
+
   wordpress:
     image: ${WORDPRESS_IMAGE_TAG}
     volumes:
@@ -47,26 +45,30 @@ services:
       WORDPRESS_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
     networks:
       - wordpress-network
-      - traefik-network
     healthcheck:
-      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      test: ["CMD", "curl", "--fail", "http://127.0.0.1:8080"]
       interval: 10s
       timeout: 5s
       retries: 3
-      start_period: 90s
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.rule=Host(`${WORDPRESS_HOSTNAME}`)"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.service=${TRAEFIK_LABEL_NAME}"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.entrypoints=websecure"
-      - "traefik.http.services.${TRAEFIK_LABEL_NAME}.loadbalancer.server.port=8080"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.tls=true"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.tls.certresolver=letsencrypt"
-      - "traefik.http.services.${TRAEFIK_LABEL_NAME}.loadbalancer.passhostheader=true"
-      - "traefik.http.routers.${TRAEFIK_LABEL_NAME}.middlewares=compresstraefik"
-      - "traefik.http.middlewares.compresstraefik.compress=true"
-      - "traefik.docker.network=traefik-network"
+      start_period: 30s
     restart: unless-stopped
     depends_on:
       mariadb:
         condition: service_healthy
+      cloudflared:
+        condition: service_healthy
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARED_TUNNEL_TOKEN}
+    networks:
+      - wordpress-network
+    healthcheck:
+      test: ["CMD", "cloudflared", "--version"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
