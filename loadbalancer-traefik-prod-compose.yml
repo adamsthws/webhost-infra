@@ -44,6 +44,7 @@ services:
       retries: 3
       start_period: 5s
     labels:
+      - "com.centurylinklabs.watchtower.enable=true"   # Enable watchtower auto-updates
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_HOSTNAME}`)"
       - "traefik.http.routers.dashboard.service=api@internal"
