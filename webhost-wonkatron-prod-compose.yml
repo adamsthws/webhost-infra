@@ -55,12 +55,10 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
-    restart: unless-stopped
     depends_on:
       mariadb:
         condition: service_healthy
-      cloudflared:
-        condition: service_healthy
+    restart: unless-stopped
 
   cloudflared:
     image: cloudflare/cloudflared:latest
@@ -78,4 +76,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 20s
+    depends_on:
+      wordpress:
+        condition: service_healthy
     restart: unless-stopped
