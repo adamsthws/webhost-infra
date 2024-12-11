@@ -64,7 +64,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run
+    command: tunnel --no-autoupdate run --metrics localhost:60123
     environment:
       TUNNEL_TOKEN: ${CLOUDFLARED_TUNNEL_TOKEN}
     labels:
