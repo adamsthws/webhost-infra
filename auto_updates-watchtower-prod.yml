@@ -11,15 +11,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock   # Connect to Docker Daemon
       - /etc/localtime:/etc/localtime:ro            # Sync time with host
     environment:
-      - WATCHTOWER_NOTIFICATIONS=email                                                                # Enable email notifications
-      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${WATCHTOWER_NOTIFICATION_EMAIL_FROM}                      # Sender email address
-      - WATCHTOWER_NOTIFICATION_EMAIL_TO=${WATCHTOWER_NOTIFICATION_EMAIL_TO}                          # Recipient email address
-      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=${WATCHTOWER_NOTIFICATION_EMAIL_SERVER}                  # SMTP server address
-      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=${WATCHTOWER_NOTIFICATION_EMAIL_PORT}               # SMTP server port
-      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${WATCHTOWER_NOTIFICATION_EMAIL_USER}               # SMTP username
-      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${WATCHTOWER_NOTIFICATION_EMAIL_PASSWORD}       # SMTP password
-      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=${WATCHTOWER_NOTIFICATION_EMAIL_DELAY}       # Delay in seconds to batch notifications
-      - WATCHTOWER_NOTIFICATION_EMAIL_NOTIFY=${WATCHTOWER_NOTIFICATION_EMAIL_NOTIFY}     # Email notifications even when no updates occur
+      - WATCHTOWER_NOTIFICATIONS=email                                                          # Enable email notifications
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${WATCHTOWER_NOTIFICATION_EMAIL_FROM}                # Sender email address
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=${WATCHTOWER_NOTIFICATION_EMAIL_TO}                    # Recipient email address
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=${WATCHTOWER_NOTIFICATION_EMAIL_SERVER}            # SMTP server address
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=${WATCHTOWER_NOTIFICATION_EMAIL_PORT}         # SMTP server port
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${WATCHTOWER_NOTIFICATION_EMAIL_USER}         # SMTP username
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${WATCHTOWER_NOTIFICATION_EMAIL_PASSWORD} # SMTP password
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=${WATCHTOWER_NOTIFICATION_EMAIL_DELAY}              # Delay to batch notifications
     command:
       - --cleanup=true                                      # Remove old images after updating
       - --remove-volumes                                    # Remove old anonymous volumes after updating
