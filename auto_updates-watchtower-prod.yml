@@ -9,7 +9,7 @@ services:
       - watchtower-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock   # Connect to Docker Daemon
-      -v /etc/localtime:/etc/localtime:ro           # Sync time with host
+      - /etc/localtime:/etc/localtime:ro            # Sync time with host
     command:
       - --cleanup=true                              # Remove old images after updating
       - --remove-volumes                            # Remove old anonymous volumes after updating
