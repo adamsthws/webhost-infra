@@ -64,9 +64,10 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run --metrics localhost:60123
+    command: tunnel --no-autoupdate run
     environment:
       TUNNEL_TOKEN: ${CLOUDFLARED_TUNNEL_TOKEN}
+      TUNNEL_METRICS: 0.0.0.0:60123
     labels:
       - "com.centurylinklabs.watchtower.enable=true"   # Enable watchtower auto-updates
     networks:
