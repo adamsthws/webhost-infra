@@ -19,6 +19,7 @@ services:
       - WATCHTOWER_NOTIFICATION_EMAIL_USER=${WATCHTOWER_NOTIFICATION_EMAIL_USER}         # SMTP username
       - WATCHTOWER_NOTIFICATION_EMAIL_PASSWORD=${WATCHTOWER_NOTIFICATION_EMAIL_PASSWORD} # SMTP password
       - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=${WATCHTOWER_NOTIFICATION_EMAIL_DELAY}       # Delay in seconds to batch notifications
+      - WATCHTOWER_NOTIFICATION_EMAIL_NOTIFY=${WATCHTOWER_NOTIFICATION_EMAIL_NOTIFY}     # Email notifications even when no updates occur
     command:
       - --cleanup=true                                      # Remove old images after updating
       - --remove-volumes                                    # Remove old anonymous volumes after updating
